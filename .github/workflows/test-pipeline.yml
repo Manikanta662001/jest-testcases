@@ -4,6 +4,11 @@ on:
     push:
         branches:
             - main # Runs the pipeline on pushes to the main branch
+            
+    pull_request:
+        branches:
+            - main # Runs the pipeline when a PR is opened targeting the main branch
+
 
 jobs:
     test:
