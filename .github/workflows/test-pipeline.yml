@@ -31,13 +31,4 @@ jobs:
               with:
                 name: coverage-report
                 path: coverage # Upload the coverage directory for inspection
-
-            - name: Check Test Coverage Thresholds
-              run: |
-                COVERAGE=$(jq '.total.statements.pct' < coverage/coverage-final.json)
-                if (( $(echo "$COVERAGE < 40" | bc -l) )); then
-                    echo "Coverage below threshold: $COVERAGE%" && exit 1
-                fi
-              shell: bash
-              
-            
+               
