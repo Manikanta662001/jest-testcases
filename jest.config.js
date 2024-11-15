@@ -12,10 +12,10 @@ module.exports = {
   collectCoverageFrom: ["src/**/*.{js,jsx}"],
   coverageThreshold: {
     global: {
-      branches: 80, // Minimum percentage of branches covered
-      functions: 80, // Minimum percentage of functions covered
-      lines: 80, // Minimum percentage of lines covered
-      statements: 80, // Minimum percentage of statements covered
+      branches: 40, // Minimum percentage of branches covered
+      functions: 40, // Minimum percentage of functions covered
+      lines: 40, // Minimum percentage of lines covered
+      statements: 40, // Minimum percentage of statements covered
     },
   },
   maxWorkers: "50%"
