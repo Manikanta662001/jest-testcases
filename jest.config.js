@@ -18,4 +18,5 @@ module.exports = {
       statements: 80, // Minimum percentage of statements covered
     },
   },
+  maxWorkers: "50%"
 };
