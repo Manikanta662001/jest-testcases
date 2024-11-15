@@ -21,7 +21,7 @@ jobs:
               run: npm install
             
             - name: Run Jest Tests
-              run: npm run jest -- --maxWorkers=50% # Runs tests using 50% of CPU cores
+              run: npm run jest:coverage -- --maxWorkers=50% # Runs tests using 50% of CPU cores
               env:
                 CI: true # Required for Jest to run properly in CI environments
 
