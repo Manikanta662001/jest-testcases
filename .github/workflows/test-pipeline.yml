@@ -1,0 +1,43 @@
+name: Jest Test Pipeline
+
+on:
+    push:
+        branches:
+            - main # Runs the pipeline on pushes to the main branch
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v3 # Check out the code from the repository
+
+            - name: Set Up Node.js
+              uses: actions/setup-node@v3
+              with:
+                node-version: 22.11.0 # Match your Node.js version with your local setup
+            - name: Install Dependencies
+              run: npm install
+            
+            - name: Run Jest Tests
+              run: npm run jest -- --maxWorkers=50% # Runs tests using 50% of CPU cores
+              env:
+                CI: true # Required for Jest to run properly in CI environments
+
+            - name: Upload Jest Coverage
+              if: success() # Upload coverage report only if tests pass
+              uses: actions/upload-artifact@v3
+              with:
+                name: coverage-report
+                path: coverage # Upload the coverage directory for inspection
+
+            - name: Check Test Coverage Thresholds
+              run: |
+                COVERAGE=$(jq '.total.statements.pct' < coverage/coverage-summary.json)
+                if (( $(echo "$COVERAGE < 80" | bc -l) )); then
+                    echo "Coverage below threshold: $COVERAGE%" && exit 1
+                fi
+              shell: bash
+              
+            
