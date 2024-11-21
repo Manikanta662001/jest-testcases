@@ -1,4 +1,4 @@
-name: React CI Pipeline
+name: Jest Test Pipeline
 
 on:
     push:
@@ -26,4 +26,14 @@ jobs:
               run: npm install
             
             - name: Run Jest Tests
-              run: npm run test
+              run: npm run jest:coverage -- --maxWorkers=50% # Runs tests using 50% of CPU cores
+              env:
+                CI: true # Required for Jest to run properly in CI environments
+
+            - name: Upload Jest Coverage
+              if: success() # Upload coverage report only if tests pass
+              uses: actions/upload-artifact@v3
+              with:
+                name: coverage-report
+                path: coverage # Upload the coverage directory for inspection
+               
