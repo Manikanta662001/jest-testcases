@@ -9,7 +9,6 @@ import ErrorPage from "./pages/ErrorPage";
 function App() {
   const userContext = useGlobalContext();
   const { isLoggedIn } = userContext;
-  console.log("TESTING:::::222222")
   return (
     <div>
       <Routes>
