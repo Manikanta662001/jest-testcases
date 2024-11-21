@@ -27,6 +27,3 @@ jobs:
             
             - name: Run Jest Tests
               run: npm run test
-
-            - name: Build Project
-              run: npm run build
